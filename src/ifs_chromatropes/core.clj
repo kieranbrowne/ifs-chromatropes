@@ -1,7 +1,6 @@
 (ns ifs-chromatropes.core
-  ;;(:use [overtone.live])
-  (:require [shadertone.shader :as t])
+  (:require [shadertone.shader :as s])
   )
 
-(t/start "./chromatrope.glsl")
-(t/stop)
+(s/start "./chromatrope.glsl")
+(s/stop)

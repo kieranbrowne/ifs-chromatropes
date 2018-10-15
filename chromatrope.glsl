@@ -128,10 +128,11 @@ vec3 color(vec2 pt) {
 
   colour = mix(colour,vec3(1.), smoothstep(.98,1.,abs(circle(pt, vec2(0.), 0.9))));
 
-  colour = mix(colour,vec3(.0,0.9,.3), vec3(smoothstep(1.84,.000,.8+sin(ngon(pt, vec2(0.6,0.2), 6)*90.)*1.2)));
-  colour = mix(colour,vec3(.4,0.0,.8), vec3(smoothstep(.000,1.84,.0+cos(ngon(pt, vec2(0.6,0.2), 6)*90.)*1.2)));
-  //colour = mix(colour,vec3(.0,0.3,.2), vec3(smoothstep(1.84,.000,.8+sin(ngon(pt, vec2(0.2,0.0), 109)*90.)*1.2)));
   // colour = mix(colour,vec3(.9,0.4,.0), vec3(smoothstep(1.84,.000,.8+sin(ngon(kal(rotate(2.)*pt, 3.), vec2(0.1,0.2), 3)*290.)*.83)));
+  colour = mix(colour,vec3(.9,0.0,.0), vec3(smoothstep(1.84,.000,.8+sin(ngon(pt, vec2(0.3,0.0), 109)*90.)*1.9)));
+  colour = mix(colour,vec3(.9,0.9,1.9), vec3(smoothstep(0.00,1.800,.8+cos(ngon(pt, vec2(0.3,0.0), 109)*90.)*1.2)));
+  // colour = mix(colour,vec3(.0,0.9,.3), vec3(smoothstep(1.84,.000,.8+sin(ngon(pt, vec2(1.9,0.0), 7)*90.)*1.2)));
+  // colour = mix(colour,vec3(.4,0.0,.8), vec3(smoothstep(.000,1.84,.0+cos(ngon(pt, vec2(0.0,0.9), 6)*90.)*1.2)));
   // colour = mix(colour,vec3(.3,.9,.2), smoothstep(0.91,0.90,circle(kal(pt, 11.), vec2(0.3), .3)));
   // colour = mix(colour,vec3(.2,0.5,.9), vec3(smoothstep(.000,1.84,.8+sin(ngon(kal(rotate(2.)*pt, 3.), vec2(0.0,0.2), 3)*120.)*.80)));
   // colour = mix(colour,vec3(.0,.2,.6), smoothstep(0.36,0.35,abs(.1-circle(kal(pt, 8.), vec2(0.7,0.8), .9))));
@@ -168,10 +169,10 @@ void main(void) {
   // projected light
   vec3 light = vec3(1.);
   // slide 1
-  light = occlude(light,color(uv*rotate(iGlobalTime/3.)));
+  light = occlude(light,color(uv*rotate(iGlobalTime/2.)));
   //colour = min(colour, );
   // slide 2
-  light = occlude(light,color(uv*rotate(-iGlobalTime/3.)));
+  light = occlude(light,color(uv*rotate(-iGlobalTime/2.)));
   //colour = min(colour, color(uv*rot(-iGlobalTime/4.)));
 
 
