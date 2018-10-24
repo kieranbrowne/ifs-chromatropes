@@ -49,13 +49,13 @@ vec3 color(vec2 pt, mat2 rot) {
   colour = mix(colour,vec3(1.), smoothstep(.98,1.,abs(circle(pt, vec2(0.), 0.9))));
 
   pt *= rot;
-  for (int i=0; i< 3; i++) {
-    pt = kal(rotate(6.28/9.)*mat2(1.0,0.,0.,1.0)*pt,5)+vec2(.09,.8);
+  for (int i=0; i< 4; i++) {
+    pt = kal(rotate(6.28/2.)*mat2(1.0,0.,0.,1.0)*pt,3)+vec2(.09,.8);
   }
   // pt *= rot;
 
-  colour = mix(colour,vec3(.8,.9,.70), vec3(smoothstep(0.90,1.800,.8+sin(ngon(pt, vec2(0.0,.0),6)*90.)*1.8)));
-  colour = mix(colour,vec3(1.0,.3,.03), vec3(smoothstep(0.00,1.800,-.9+cos(ngon(pt, vec2(0.0,.0),6)*90.)*1.8)));
+  colour = mix(colour,vec3(.2,.3,.60), vec3(smoothstep(0.90,1.800,.2+sin(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
+  colour = mix(colour,vec3(-smoothstep(.4,.35,length(pt))*.4+.6,smoothstep(.4,.45,length(pt))/2.+.3,.3), vec3(smoothstep(0.00,1.800,-.2+cos(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
 
   return colour;
 }
