@@ -46,16 +46,43 @@ vec3 color(vec2 pt, mat2 rot) {
   vec3 colour = vec3(0.);
   vec3 inner = vec3(0.);
 
+  vec2 uv = pt;
   colour = mix(colour,vec3(1.), smoothstep(.98,1.,abs(circle(pt, vec2(0.), 0.9))));
 
   pt *= rot;
-  for (int i=0; i< 4; i++) {
-    pt = kal(rotate(6.28/2.)*mat2(1.0,0.,0.,1.0)*pt,3)+vec2(.09,.8);
+  for (int i=0; i< 8; i++) {
+    pt = kal(rotate(6.28/2.)*mat2(1.0,0.,0.,1.0)*pt,6)+vec2(.29,.2);
   }
   // pt *= rot;
+  inner = vec3(0.0);
+  vec3 outer = vec3(0.0);
 
-  colour = mix(colour,vec3(.2,.3,.60), vec3(smoothstep(0.90,1.800,.2+sin(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
-  colour = mix(colour,vec3(-smoothstep(.4,.35,length(pt))*.4+.6,smoothstep(.4,.45,length(pt))/2.+.3,.3), vec3(smoothstep(0.00,1.800,-.2+cos(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
+  colour = mix(colour,vec3(1.), vec3(smoothstep(0.90,1.800,-3.92+sin(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
+  colour = mix(colour,vec3(1.), vec3(smoothstep(0.00,-1.800,-.2+cos(ngon(pt, vec2(0.0,.0),6)*90.)*2.8)));
+
+
+  pt = uv;
+  pt *= rot;
+  for (int i=0; i< 3; i++) {
+    pt = kal(rotate(6.28/4.)*mat2(1.0,0.,0.,1.0)*pt,6)+vec2(.29,.2);
+  }
+  inner = mix(inner,vec3(1.), vec3(smoothstep(0.00,-1.900,1.6+cos(ngon(pt, vec2(1.0,.0),5)*90.)*3.8)));
+
+  pt = uv;
+  pt *= rot;
+  for (int i=0; i< 8; i++) {
+    pt = kal(rotate(6.28/2.)*mat2(1.0,0.,0.,1.0)*pt,29)+vec2(.9,.2);
+  }
+
+  outer = mix(outer,vec3(1.), vec3(smoothstep(0.00,-1.900,1.6+cos(ngon(pt, vec2(0.0,.0),1)*30.)*6.8)));
+
+  colour = mix(colour, vec3(1.), smoothstep(0.5,.55, circle(uv,vec2(0.),.6)));
+  colour = mix(inner, colour, smoothstep(0.6,.55, circle(uv,vec2(0.),.6)));
+
+
+  colour = mix(colour, vec3(1.), smoothstep(0.85,.9, circle(uv,vec2(0.),.6)));
+  colour = mix(outer, colour, smoothstep(0.95,.9, circle(uv,vec2(0.),.6)));
+
 
   return colour;
 }
