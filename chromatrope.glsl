@@ -70,10 +70,26 @@ vec3 color(vec2 pt, mat2 rot) {
 
   // flashes
   // placed out of phase slightly, these can create interesting animated patterns
-  // for (int i=0; i< 8; i++) {
-  //   pt = kal(rotate(6.28/9.)*mat2(1.0,0.,0.,1.0)*pt,18);
-  // }
-  // colour = mix(colour,vec3(1.), smoothstep(.02,.03,ngon(pt, vec2(0.0,0.8), 12)));
+  for (int i=0; i< 8; i++) {
+    pt = kal(rotate(6.28/9.56)*mat2(1.0,0.,0.,1.0)*pt,18);
+  }
+  colour = mix(colour,vec3(1.), smoothstep(.02,.03,ngon(pt, vec2(0.0,0.7), 12)));
+
+  pt = uv;
+  for (int i=0; i< 8; i++) {
+    pt = kal(rotate(6.28/6.35)*mat2(1.0,0.,0.,1.0)*pt,12);
+  }
+  colour = mix(colour, vec3(smoothstep(.02,.03,ngon(pt, vec2(0.0,0.6), 12))),
+               smoothstep(.7,.6, length(uv))
+               );
+
+  pt = uv;
+  for (int i=0; i< 8; i++) {
+    pt = kal(rotate(6.28/6.65)*mat2(1.0,0.,0.,1.0)*pt,12);
+  }
+  colour = mix(colour, vec3(smoothstep(.02,.03,ngon(pt, vec2(0.0,0.5), 12))),
+               smoothstep(.6,.5, length(uv))
+               );
 
   // firework thing
   // pt *= rot;
@@ -84,10 +100,10 @@ vec3 color(vec2 pt, mat2 rot) {
 
   // fishy thing
   // pt *= rot;
-  for (int i=0; i< 2; i++) {
-    pt = kal(rotate(6.28/2.8)*mat2(1.0,0.,0.,1.0)*pt,8);
-  }
-  colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.2,-.305)*rot, vec2(-.0,-.71))));
+  // for (int i=0; i< 2; i++) {
+  //   pt = kal(rotate(6.28/2.8)*mat2(1.0,0.,0.,1.0)*pt,8);
+  // }
+  // colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.2,-.305)*rot, vec2(-.0,-.71))));
 
 
   // star thing
@@ -165,29 +181,29 @@ vec3 color(vec2 pt, mat2 rot) {
 
   // fishy thing
   // pt *= rot;
-  for (int i=0; i < 2; i++) {
-    pt = kal(rotate(6.28/.14)*mat2(1.0,0.,0.,1.0)*pt,21);
-  }
-  colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.2,-.305)*rot, vec2(-.0,-.71))));
+  // for (int i=0; i < 2; i++) {
+  //   pt = kal(rotate(6.28/.14)*mat2(1.0,0.,0.,1.0)*pt,21);
+  // }
+  // colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.2,-.305)*rot, vec2(-.0,-.71))));
 
-  colour = mix(colour, vec3(smoothstep(-.2,.6,-sin(ngon(uv, vec2(0.,0.),4) * 138.))), smoothstep(.51,.5,length(uv)));
-  colour = mix(colour, vec3(1.), smoothstep(.23,.22,length(uv)));
+  // colour = mix(colour, vec3(smoothstep(-.2,.6,-sin(ngon(uv, vec2(0.,0.),4) * 138.))), smoothstep(.51,.5,length(uv)));
+  // colour = mix(colour, vec3(1.), smoothstep(.23,.22,length(uv)));
 
 
   pt = uv;
-  // pt *= rot;
+  //pt *= rot;
   for (int i=0; i< 1; i++) {
-    pt = kal(rotate(6.28/3.145)*mat2(1.0,0.,0.,1.0)*pt,26);
+    pt = kal(rotate(6.28/1)*mat2(1.0,0.,0.,1.0)*pt,16);
   }
-  //colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.0,-.305), vec2(-.3,-.91))));
-  colour = mix(colour, vec3(smoothstep(.005,.017,line(pt,vec2(-.0,-.0), vec2(-.0,-.91)))), smoothstep(.21,.2,length(uv)));
+  // colour = mix(colour,vec3(1.), smoothstep(.02,.03,line(pt,vec2(-.0,-.305), vec2(-.3,-.91))));
+  colour = mix(colour, vec3(smoothstep(.005,.017,line(pt,vec2(-.03,-.0), vec2(-.03,-.91)))), smoothstep(.41,.4,length(uv)));
 
   pt = uv;
-  // pt *= rot;
+  pt *= rot;
   for (int i=0; i< 1; i++) {
     pt = kal(rotate(6.28/3.145)*mat2(1.0,0.,0.,1.0)*pt,70);
   }
-  colour = mix(colour, vec3(smoothstep(0.01,.022,line(pt,vec2(.0,-1.), vec2(.0,1.)))), smoothstep(.73,.75,length(uv)));
+  colour = mix(colour, vec3(smoothstep(0.00,.022,line(pt,vec2(.0,-1.), vec2(.0,1.)))), smoothstep(.73,.75,length(uv)));
 
   return colour;
 }
@@ -209,7 +225,7 @@ void main(void) {
   // projected light
   vec3 light = vec3(1.);
   // slide 1
-  //light = occlude(light,color(uv*rotate( iGlobalTime/4.4), rotate(-length(uv*1.0) )));
+  // light = occlude(light,color(uv*rotate( iGlobalTime/4.4), rotate(-length(uv*1.0) )));
   //colour = min(colour, );
   // slide 2
   light = occlude(light,color(uv*rotate(-iGlobalTime/4.4), rotate(length(uv*1.0))));
